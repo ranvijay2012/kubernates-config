@@ -76,3 +76,30 @@ kubectl apply -f k8s/prod/
 ✔ Clean
 ✔ Scalable
 ✔ Used in companies
+
+#ArgoCD DevOps configuration
+Step 1 — Install Argo CD (if not installed)
+
+kubectl create namespace argocd
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+Check:
+kubectl get pods -n argocd
+
+🔑 Step 2 — Login to Argo CD
+
+Port-forward: kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+Open: https://localhost:8080
+
+Default username: admin
+
+Get password from window command: 
+[System.Text.Encoding]::UTF8.GetString(
+[System.Convert]::FromBase64String(
+(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}")
+)
+)
+
+Password: cqIOlMlWDXY2gXoR
+
