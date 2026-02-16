@@ -27,3 +27,52 @@ kubectl get services
 
 #Accessing the Application
 minikube service <spring-name>
+
+
+
+Option 1 — Simple Project (Good for learning)
+my-app-repo/
+│
+├── k8s/
+│   ├── deployment.yaml
+│   └── service.yaml
+│
+├── Dockerfile
+├── src/
+└── README.md
+
+👉 How you run
+kubectl apply -f k8s/
+
+
+✔ Easy
+✔ Good for small apps
+❌ Not ideal for multi-env
+
+🚀 Option 2 — Environment-Based (Production Recommended)
+my-app-repo/
+│
+├── k8s/
+│   ├── dev/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   │
+│   ├── qa/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   │
+│   └── prod/
+│       ├── deployment.yaml
+│       └── service.yaml
+│
+├── Dockerfile
+└── src/
+
+👉 Apply per environment
+kubectl apply -f k8s/dev/
+kubectl apply -f k8s/prod/
+
+
+✔ Clean
+✔ Scalable
+✔ Used in companies
