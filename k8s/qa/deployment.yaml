@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employe-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app:  employe-service
+  template:
+    metadata:
+      labels:
+        app:  employe-service
+    spec:
+      containers:
+        - name:  employe-service
+          image: ranvijaysingh/employe-service:1.0.0
+          ports:
+            - containerPort: 8080
